@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bem Vindo ao TaskManager</h1>
+    <p>Seu gerenciador de Tarefas simplificado</p>
+</div>
+
+<!-- Card Grande com Link para as Tarefas -->
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem; margin: 0 auto;">
+    <div class="card-header text-center">
+        <h4 class="card-title">Tarefas</h4>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Gerencie suas tarefas facilmente</h5>
+        <p class="card-text">Clique aqui para acessar a lista de tarefas e começar a organizar seu trabalho.</p>
+        <a href="@Url.Action("Index", "Tarefa")" class="btn btn-light">Acessar Tarefas</a>
+    </div>
+</div>

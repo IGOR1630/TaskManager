@@ -17,9 +17,9 @@ public partial class TaskManagerContext : DbContext
 
     public virtual DbSet<Tarefa> Tarefas { get; set; }
 
-   // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+  //  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-      //  => optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123456;database=TaskManager");
+  //      => optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=123456;database=TaskManager");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -28,8 +28,6 @@ public partial class TaskManagerContext : DbContext
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("tarefas");
-
-            entity.HasIndex(e => e.Tarefascol, "Tarefascol_UNIQUE").IsUnique();
 
             entity.HasIndex(e => e.Nome, "nome_UNIQUE").IsUnique();
 
@@ -40,7 +38,6 @@ public partial class TaskManagerContext : DbContext
                 .HasColumnName("dataLimite");
             entity.Property(e => e.Nome).HasMaxLength(200);
             entity.Property(e => e.OrdemApresentacao).HasColumnName("ordemApresentacao");
-            entity.Property(e => e.Tarefascol).HasMaxLength(45);
         });
 
         OnModelCreatingPartial(modelBuilder);

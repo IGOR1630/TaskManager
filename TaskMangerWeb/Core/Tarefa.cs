@@ -14,6 +14,4 @@ public partial class Tarefa
     public DateTime DataLimite { get; set; }
 
     public int? OrdemApresentacao { get; set; }
-
-    public string Tarefascol { get; set; } = null!;
 }

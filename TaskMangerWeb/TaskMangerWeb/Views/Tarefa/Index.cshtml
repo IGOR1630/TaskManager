@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TaskMangerWeb.Models.TarefaModel>
+
+@{
+    ViewData["Title"] = "Lista de Tarefas";
+}
+
+<h1 class="text-center my-4">Lista de Tarefas</h1>
+
+<div class="text-end mb-3">
+    <a asp-action="Create" class="btn btn-primary">Criar nova tarefa</a>
+</div>
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ID)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Custo)</th>
+            <th>@Html.DisplayNameFor(model => model.DataLimite)</th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(t => t.OrdemApresentacao)) // Ordenando por OrdemApresentacao
+        {
+            <tr class="@(item.Custo >= 1000 ? "table-warning" : "")">
+                <!-- Destacando as tarefas com custo >= 1000 -->
+                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Custo)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataLimite)</td>
+                <td class="text-center">
+                    <!-- Botões de ação com ícones do Bootstrap -->
+                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-2" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                    </a>
+
+                    <!-- Botões de reordenação -->
+                    @if (item.OrdemApresentacao > 1)
+                    {
+                        <button class="btn btn-sm btn-outline-info me-2" onclick="changeOrder(@item.ID, -1)" title="Subir">
+                            <i class="bi bi-arrow-up"></i>
+                        </button>
+                    }
+                    @if (item.OrdemApresentacao < Model.Count())
+                    {
+                        <button class="btn btn-sm btn-outline-info" onclick="changeOrder(@item.ID, 1)" title="Descer">
+                            <i class="bi bi-arrow-down"></i>
+                        </button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function changeOrder(taskId, direction) {
+            $.post('@Url.Action("ChangeOrder")', { id: taskId, direction: direction })
+                .done(function () {
+                    location.reload(); // Recarregar a página para aplicar a nova ordem
+                })
+                .fail(function () {
+                    alert("Falha ao alterar a ordem.");
+                });
+        }
+    </script>
+}

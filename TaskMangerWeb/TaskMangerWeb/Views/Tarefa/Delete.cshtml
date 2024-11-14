@@ -1,0 +1,74 @@
+﻿@model TaskMangerWeb.Models.TarefaModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Excluir Tarefa</h1>
+
+<h3>Você tem certeza que quer excluir essa tarefa?</h3>
+<div>
+    <h4>Tarefa: @Model.Nome</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Custo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Custo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataLimite)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataLimite)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrdemApresentacao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrdemApresentacao)
+        </dd>
+    </dl>
+
+    <!-- Botão que abre o modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        Excluir
+    </button>
+    <a class="btn btn-secondary" asp-action="Index">Voltar para as Tarefas</a>
+
+    <!-- Modal de confirmação -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Você tem certeza que quer excluir essa tarefa? "<strong>@Model.Nome</strong>"? Está ação não pode ser refeita.
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.ID" />
+                        <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
