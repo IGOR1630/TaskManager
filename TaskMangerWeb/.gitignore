@@ -1,0 +1,20 @@
+# Ignora a pasta de configuração do Visual Studio
+.vs/
+
+# Ignora arquivos temporários do sistema
+*.tmp
+*.log
+*.obj
+*.exe
+
+# Ignora diretórios de binários e objetos do .NET
+bin/
+obj/
+
+# Ignora configurações locais de usuário
+*.user
+*.suo
+
+# Ignora outras pastas específicas
+**/Debug/
+**/Release/
